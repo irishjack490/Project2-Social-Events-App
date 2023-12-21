@@ -4,7 +4,7 @@ This is a fun app where a group of friends can sign up for an account and have a
 
 ## User Stories
 
-For privacy reasons, the user should only have access to the group's information. As a user I should be able to do the following:
+For privacy reasons, the user should only have access to the group's information if logged in. As a user I should be able to do the following:
     Have a rendered view of all the friends in my circle
     Have the capability of adding more friends
     Post an event for the group to participate in
