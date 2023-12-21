@@ -23,4 +23,4 @@ For privacy reasons, the user should only have access to the group's information
 
 ## Entry Relationship Diagram (ERD)
 
-![Alt text](20231220_192910.jpg)
+![Alt text](image.png)
