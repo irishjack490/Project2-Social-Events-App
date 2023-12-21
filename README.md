@@ -14,10 +14,7 @@ For privacy reasons, the user should only have access to the group's information
 
 ## Wireframes
 
-![Alt text](20231220_185535-2.jpg)
-
-![Alt text](20231220_185540.jpg)
-
+![Alt text](image-3.png)
 
 
 
