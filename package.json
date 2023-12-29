@@ -1,0 +1,30 @@
+{
+  "name": "project2",
+  "version": "1.0.0",
+  "description": "This is a fun app where a group of friends can sign up for an account and have a special space for them to interact. The app displays the friends in their circle, a section with fun suggestions to do as a group, a section where friends can post events and other friends can confirm their attendance and lastly encourage each other through posts and positive notes",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "mongoose, express, ejs"
+  },
+  "keywords": [
+    "mongoose",
+    "express",
+    "ejs"
+  ],
+  "author": "JackS",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mongoose": "^8.0.3",
+    "morgan": "^1.10.0",
+    "path": "^0.12.7"
+  }
+}
