@@ -14,10 +14,11 @@ For privacy reasons, the user should only have access to the group's information
 
 ## Wireframes
 
-![Alt text](image-3.png)
+![image](https://github.com/irishjack490/Project2-Social-Events-App/assets/146676274/9bd3fc49-415b-415f-825d-ccfbccc52dc5)
+
 
 
 
 ## Entry Relationship Diagram (ERD)
 
-![Alt text](20231220_192910.jpg)
+![image](https://github.com/irishjack490/Project2-Social-Events-App/assets/146676274/352d8775-cb20-4ace-bb42-32c27a757068)
