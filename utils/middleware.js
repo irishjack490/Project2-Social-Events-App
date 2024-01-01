@@ -16,7 +16,7 @@ const middleware = (app) => {   //middleware runs before all apps
     app.use(methodOverride('_method'))
     app.use(express.urlencoded({extended: true}))
     app.use(morgan('tiny'))
-    app.use(express.static('public'))
+    app.use(express.static('public')) //line of code that allowes for css styles inside public folder to run
     app.use(express.json())
 
 
