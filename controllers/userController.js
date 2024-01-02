@@ -31,4 +31,4 @@ router.get('/logout', (req, res) => {
 //DELETE -> Logout
 
 ////Export Router///////
-module.exports = router;
+module.exports = router

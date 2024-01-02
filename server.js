@@ -45,6 +45,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/users', UserRouter)
+app.use('/events', eventsRouter)
+
 
 app.get('/error', (req, res) => {
     const error = req.query.error || 'Ope! Something went wrong...try again'
