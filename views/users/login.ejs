@@ -1,0 +1,22 @@
+<%- include('../partials/header.ejs') %> 
+ <div class="container-sm">
+    <form action="/users/login" method="POST">
+        <fieldset>
+            <legend>Please login to see Events!</legend>
+            <label class="form-label">Username:</label>
+            <input type="text" class="form-control" name="username"
+            placeholder="username" required> <!--name needs to match what is in the model-->
+
+            
+            <label class="form-label">Password:</label>
+            <input type="password" class="form-control" name="password"
+            placeholder="password" required>
+
+            <input type="submit" class="btn btn-success mt-3" value="Log In">
+        </fieldset>
+
+
+    </form>
+
+ </div>
+<%- include('../partials/footer.ejs') %> 

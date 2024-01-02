@@ -13,7 +13,7 @@ const MongoStore = require('connect-mongo');
 ////////////////////////
 ////Import Routers/////
 ///////////////////////
-const userRouter = ('./controllers/userController');
+const UserRouter = ('./controllers/userController');
 const eventsRouter = ('./controllers/eventsRouter');
 
 ///////////////////////////////////////////////
@@ -44,15 +44,17 @@ app.get('/', (req, res) => {
     //res.send('<h1>Hello World</h1>')
 });
 
+app.use('/users', UserRouter)
+
 app.get('/error', (req, res) => {
     const error = req.query.error || 'Ope! Something went wrong...try again'
 
-    const { username, loggedIn, userId } = req.session
+    const { username, loggedIn, userId } = req.session //saving loggin stuff on the session, mongo store is allwing this
 
     // res.send(error)
-    res.render('error.ejs', { error, userId, username, loggedIn })
+    res.render('error.ejs', { error, userId, username, loggedIn }) //send data as part of an object to our view 
 })
 
-app.listen(3000, function (){
+app.listen(3000, function () {
     console.log('Listening on port 3000')
 })
