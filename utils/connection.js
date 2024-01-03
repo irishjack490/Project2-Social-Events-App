@@ -7,7 +7,7 @@ const Mongostore = require('connect-mongo');
 const DATABASE_URL = process.env.DATABASE_URL;
 
 const CONFIG = {
-    useNewUrlParse: true,
+    useNewUrlParser: true,
     useUnifiedTopology: true
 }
 

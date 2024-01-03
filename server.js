@@ -13,8 +13,8 @@ const MongoStore = require('connect-mongo');
 ////////////////////////
 ////Import Routers/////
 ///////////////////////
-const UserRouter = ('./controllers/userController');
-const eventsRouter = ('./controllers/eventsRouter');
+const UserRouter = require('./controllers/userController');
+//const eventsRouter = require('./controllers/eventsRouter');
 
 ///////////////////////////////////////////////
 //Create Express app + set up view enginge////
@@ -44,12 +44,12 @@ app.get('/', (req, res) => {
     //res.send('<h1>Hello World</h1>')
 });
 
-app.use('/users', UserRouter)
-app.use('/events', eventsRouter)
+app.use('/users', UserRouter);
+//app.use('/events', eventsRouter);
 
 
 app.get('/error', (req, res) => {
-    const error = req.query.error || 'Ope! Something went wrong...try again'
+    const error = req.query.error || 'Something went wrong...try again'
 
     const { username, loggedIn, userId } = req.session //saving loggin stuff on the session, mongo store is allwing this
 
