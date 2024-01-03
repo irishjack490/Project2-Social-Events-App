@@ -14,7 +14,8 @@ const methodOverride = require('method-override');// for forms and CRUD
 //////////////////////////////
 const middleware = (app) => {   //middleware runs before all apps 
     app.use(methodOverride('_method'))
-    app.use(express.urlencoded({extended: true}))
+     //will allow to get dara from the forms as req.body
+    app.use(express.urlencoded({extended: true}));
     app.use(morgan('tiny'))
     app.use(express.static('public')) //line of code that allowes for css styles inside public folder to run
     app.use(express.json())
