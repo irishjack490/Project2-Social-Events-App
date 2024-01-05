@@ -15,10 +15,10 @@ router.get('/all', (req, res) => {
     axios(allEventsUrl)
         // if we get data, render an index page
         .then(apiRes => {
-            console.log('this came back from the api: \n', apiRes.data[0])
-            // apiRes.data is an array of country objects
-            res.send(apiRes)
-            //res.render('/events/index', { events: apiRes.data, username, userId, loggedIn})
+            console.log('this came back from the api: \n', apiRes.data)
+            // apiRes.data is an array of events objects 
+            //res.send(apiRes.data)
+            res.render('events/index', { events: apiRes.data, username, userId, loggedIn})
         })
         // if something goes wrong, display an error page
         .catch(err => {
