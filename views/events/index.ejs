@@ -1,0 +1,16 @@
+<%- include('./partials/header') %>
+
+<div class="container center">
+    <div class="container row text-center">
+        <% events.forEach(function(e) {%>
+            <div class="card mt-3 me-3 placeCard">
+                <img src="<%= e.category %>" alt="flag of country" class="card-img-top mt-3">
+                <div class="card-body">
+                    <h5 class="card-title"><%= e.name.official %></h5>
+                    <a href="/events/index <%= e.name %>" class="btn">View More</a>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div> 
+<%- include('./partials/footer') %>

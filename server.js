@@ -10,11 +10,12 @@ const createError = require ('http-errors');
 const middleware = require('./utils/middleware');
 const MongoStore = require('connect-mongo');
 
+
 ////////////////////////
 ////Import Routers/////
 ///////////////////////
 const UserRouter = require('./controllers/userController');
-//const eventsRouter = require('./controllers/eventsRouter');
+const eventsRouter = require('./controllers/eventsController');
 
 ///////////////////////////////////////////////
 //Create Express app + set up view enginge////
@@ -45,7 +46,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/users', UserRouter);
-//app.use('/events', eventsRouter);
+app.use('/events', eventsRouter);
 
 
 app.get('/error', (req, res) => {

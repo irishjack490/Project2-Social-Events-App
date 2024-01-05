@@ -19,7 +19,7 @@ router.post('/signup', async (req, res) => {
     const { username, loggedIn, userId } = req.session
     console.log('The session: \n', req.session )
     const newUser = req.body
-    console.log('the user: \n', newUser)
+    //console.log('the user: \n', newUser)
    
     //encrypt with bcrypt, genSalt gives password 10 rounds of encrypting and it will be saved to our Database
 
@@ -28,7 +28,7 @@ router.post('/signup', async (req, res) => {
         newUser.password, 
         await bcrypt.genSalt(10)
     )
-    console.log('the user after bcrypt', newUser)
+    //console.log('the user after bcrypt', newUser)
 
     //create our user
     User.create(newUser)
@@ -56,6 +56,43 @@ router.get('/login', (req, res) => {
 });
 //POST -> Login
 
+router.post('/login', async (req, res) => {
+    // const { username, loggedIn, userId } = req.session
+
+    // pull our credentials from the req.body
+    const { username, password } = req.body
+
+    // search the db for our user
+    User.findOne({ username })
+        .then(async (user) => {
+            // if the user exists
+            if (user) {
+                // we compare password 
+                const result = await bcrypt.compare(password, user.password)
+
+                if (result) {
+                    // if the pws match -> log them in and create the session
+                    req.session.username = username
+                    req.session.loggedIn = true
+                    req.session.userId = user.id
+
+                    // once we're logged in, redirect to the home page
+                    res.redirect('/')
+                } else {
+                    res.redirect(`/error?error=something%20wrong%20with%20credentials`)
+                }
+
+            } else {
+                res.redirect(`/error`)
+            }
+        })
+        .catch(err => {
+            console.log('error')
+            res.redirect(`/error?error=${err}`)
+        })
+})
+
+
 //GET -> Logout
 router.get('/logout', (req, res) => {
     const { username, loggedIn, userId } = req.session
@@ -63,6 +100,11 @@ router.get('/logout', (req, res) => {
     res.render('users/logout', { username, loggedIn, userId})
 });
 //DELETE -> Logout
+
+router.delete('/logout', (req, res) => {
+    req.session.destroy(() =>
+    res.redirect('/'))
+})
 
 ////Export Router///////
 module.exports = router
