@@ -1,3 +1,9 @@
 body {
     background-color: #ffb5b5;
 }
+
+
+.custom-card {
+    max-width: 500px; /* Adjust the max-width to your desired width */
+    margin: auto; /* Center the card */
+  }
