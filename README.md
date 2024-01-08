@@ -7,9 +7,9 @@ This is a fun app that a group of friends can use as a platform to post fun even
 For privacy reasons, the user should only have access to the group's information if logged in. As a user I should be able to do the following:
     "*" Log in 
     "*"Have a rendered view of all the fun events coming up
-    "*"Have the capability of commenting on the the events and viewing all my friends comments in the posted event
-    "*"Post a new event
-    "*"Have the choice to confirm if I am going, if not going, or may be going
+    "*"Have the capability of saving favorite events and displaying it to another page
+    "*"Add a friend that is also a user of the app 
+    "*"Have the choice to comment on events where other users can see the comments 
     "*" Log out
 
 ## Wireframes
