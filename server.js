@@ -9,6 +9,8 @@ const path = require('path');
 const createError = require ('http-errors');
 const middleware = require('./utils/middleware');
 const MongoStore = require('connect-mongo');
+const Event = require('./models/event');
+const User = require('./models/user');
 
 
 ////////////////////////
@@ -25,7 +27,6 @@ const app = express();
 //view engine - ejs
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
 
 
 /////////////////////////

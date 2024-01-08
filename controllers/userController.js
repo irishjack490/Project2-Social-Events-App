@@ -106,5 +106,23 @@ router.delete('/logout', (req, res) => {
     res.redirect('/'))
 })
 
+//added on 1/7
+router.get('/favorites/:userId', async (req, res) => {
+    const userId = req.params.userId;
+  
+    try {
+      const user = await User.findById(userId).populate('savedEvents');
+  
+      if (user) {
+        res.render('favorites', { user });
+      } else {
+        res.status(404).send('User not found.');
+      }
+    } catch (error) {
+      console.error('Error fetching user:', error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
+
 ////Export Router///////
 module.exports = router

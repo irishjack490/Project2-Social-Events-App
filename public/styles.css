@@ -4,6 +4,12 @@ body {
 
 
 .custom-card {
-    max-width: 500px; /* Adjust the max-width to your desired width */
+    max-width: 450px; /* Adjust the max-width to your desired width */
     margin: auto; /* Center the card */
   }
+
+.card-img-top {
+    max-width: 80%;
+    margin: auto;
+    padding-top: 10%;
+}

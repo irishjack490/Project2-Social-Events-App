@@ -16,7 +16,8 @@ const userSchema = new Schema ({
     password: {
         type: String,
         required: true, 
-    }
+    },
+    likedEvents: [{ type: Number, unique: true }],
 })
 ///User Model////
 const User = model('User', userSchema);
