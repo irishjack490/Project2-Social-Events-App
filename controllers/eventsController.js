@@ -72,5 +72,34 @@ router.post('/like-event/:eventId', async (req, res) => {
       res.status(500).json({ success: false, message: 'Internal Server Error' });
     }
   });
+
+  //Delete event from favorites when clicking on the button
+
+  router.post('/toggle-like-event/:eventId', async (req, res) => {
+    const { username, loggedIn, userId } = req.session
+    const eventId = req.params.eventId;
+    
+  
+    try {
+      const user = await User.findById(userId);
+  
+      // Check if the event is liked
+      const eventIndex = user.likedEvents.indexOf(eventId);
+      if (eventIndex !== -1) {
+        // If liked, remove it
+        user.likedEvents.splice(eventIndex, 1);
+        await user.save();
+        res.json({ success: true, message: 'Event removed from favorites' });
+      } else {
+        // If not liked, add it
+        user.likedEvents.push(eventId);
+        await user.save();
+        res.json({ success: true, message: 'Event added to favorites' });
+      }
+    } catch (error) {
+      console.error('Error toggling event like:', error);
+      res.status(500).json({ success: false, message: 'Internal Server Error' });
+    }
+  });
   module.exports = router;
  

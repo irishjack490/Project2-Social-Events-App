@@ -106,7 +106,7 @@ router.delete('/logout', (req, res) => {
     res.redirect('/'))
 })
 
-//added on 1/7
+//gET route for favorites
 router.get('/favorites/:userId', async (req, res) => {
     const userId = req.params.userId;
   
