@@ -1,8 +1,6 @@
 ///Schema and dependencies////
 const mongoose = require('../utils/connection');
 
-
-
 ///destructuring the Schema and model from mongoose
 const {Schema, model} = mongoose;
 
@@ -17,6 +15,7 @@ const userSchema = new Schema ({
         type: String,
         required: true, 
     },
+    //heart feature 
     likedEvents: [{ type: Number, unique: true }],
 })
 ///User Model////

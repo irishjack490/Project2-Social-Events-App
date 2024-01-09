@@ -11,12 +11,15 @@
           <p class="card-text"> <%= e.venue.address %> </p>
           <p class="card-text"> <%= e.venue.state %> </p>
           <a href="<%= e.venue.url %>" class="btn btn-primary">Click here for more info!</a>
+          <label for="interested">Interested</label>
+          <input type="checkbox" name="Interested?" checked>
           <button class="heart-btn" data-event-id="<%= e.id %>">&#10084;</button>
         </div>
       </div>
     </div>
   <% }) %>
 </div>
+
 
 <%- include('../partials/footer') %>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
