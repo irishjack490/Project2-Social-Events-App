@@ -11,7 +11,7 @@
           <p class="card-text"> <%= e.venue.address %> </p>
           <p class="card-text"> <%= e.venue.state %> </p>
           <a href="<%= e.venue.url %>" class="btn btn-primary">Click here for more info!</a>
-          <form action="events/add" method="POST">
+          <form action="/events/add" method="POST">
           <label for="interested">Interested</label>
           <input type="checkbox" name="Interested?" checked>
           <button type="submit">Submit</button>

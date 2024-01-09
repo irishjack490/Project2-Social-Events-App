@@ -48,7 +48,7 @@ router.post('/add', async (req, res) => {
 
     console.log('Event added successfully:', newEvent);
 
-    res.send('/add', username, userId, loggedIn)
+    res.send('events/add', newEvent, username, userId, loggedIn)
 
     // Respond with a success message or redirect to another page
     res.status(200).json({ message: 'Event added successfully', event: newEvent });
