@@ -11,11 +11,15 @@
           <p class="card-text"> <%= e.venue.address %> </p>
           <p class="card-text"> <%= e.venue.state %> </p>
           <a href="<%= e.venue.url %>" class="btn btn-primary">Click here for more info!</a>
+
+         <!--This will go to /events/add-->
           <form action="/events/add" method="POST">
+          <fieldset>
+          <input hidden type="text" name="type" value="<%= e.type %>">
           <label for="interested">Interested</label>
           <input type="checkbox" name="Interested?" checked>
+          </fieldset>
           <button type="submit">Submit</button>
-
           </form>
           <button class="heart-btn" data-event-id="<%= e.id %>">&#10084;</button>
         </div>

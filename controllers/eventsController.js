@@ -38,25 +38,17 @@ router.get('/all', (req, res) => {
         })
 })
 
-//POST events/add
-
+//POST  -> events/add
 router.post('/add', async (req, res) => {
-  try {
-    const { username, loggedIn, userId } = req.session;
-    const theEvent = req.body;
-    const newEvent = await Event.create({ ...theEvent, userId: userId });
+  const { username, loggedIn, userId } = req.session
+  //gets info from index all events
+  const theEvent = req.body 
+  theEvent.owner = userId
+  console.log('This must be the event: \n', theEvent)
 
-    console.log('Event added successfully:', newEvent);
+  res.send(theEvent)
 
-    res.send('events/add', newEvent, username, userId, loggedIn)
-
-    // Respond with a success message or redirect to another page
-    res.status(200).json({ message: 'Event added successfully', event: newEvent });
-  } catch (error) {
-    console.error('Error adding event:', error);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-});
+})
 //GET -> /events/venue
 //getting axios 403 error, API will not allow the use of a 2nd end point
 // router.get('/:venue', (req, res) => {
