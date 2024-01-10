@@ -1,12 +1,13 @@
 
-const mongoose = require('mongoose');
+const mongoose = require('../utils/connection');
 const {Schema, model} = mongoose;
 
 
 const eventSchema = new mongoose.Schema({
-  type: { type: String, required: true },
-  //date: { type: Date, required: true},
-  //location: {type: String, required: true},
+  type: { type: Array, required: true },
+  datetime_utc: { type: Array,  required: true},
+  venueName: {type: Array, required: true},
+  venueAddress: {type: Array, required: true},
   interested: {type: Boolean, required: true },
   //id reference, mongoose syntax, object id reference: mongoose validator
   owner: {

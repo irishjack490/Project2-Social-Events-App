@@ -6,7 +6,7 @@ const User = require('../models/user');
 ///Create Router/////
 const router = express.Router();
 const allEventsUrl = process.env.EVENT_API_URL;
-const allVenuesUrl = process.env.VENUE_API_URL;//getting error 403
+
 
 /////Routes+Controllers/////
 // Middleware to check if the user is logged in
@@ -44,11 +44,74 @@ router.post('/add', async (req, res) => {
   //gets info from index all events
   const theEvent = req.body 
   theEvent.owner = userId
-  console.log('This must be the event: \n', theEvent)
+  theEvent.interested = !!theEvent.interested
+ // console.log('This must be the event: \n', theEvent)
 
-  res.send(theEvent)
+  //res.send(theEvent)
+  Event.create(theEvent)
+    .then(newEvent => {
+      //res.send(newEvent)
+      res.redirect(`/events/mine`)
+    })
+    .catch(err => {
+      console.log('error')
+      res.redirect(`/error?error=${err}`)
+  })
 
 })
+//displays saved places 
+router.get('/mine', (req, res) => {
+//query database 
+//display in list format 
+const { username, loggedIn, userId } = req.session
+  Event.find({owner: userId})
+  .then(userEvents => {
+
+    //res.send(userEvents)
+    res.render('events/mine', {events: userEvents, username, loggedIn, userId})
+  })
+
+  .catch(err => {
+    console.log('error')
+    res.redirect(`/error?error=${err}`)
+})
+
+})
+//Remove event from interested list
+router.get('/delete/:id', (req, res) => {
+  const { username, loggedIn, userId } = req.session
+  const eventId = req.params.id
+
+  Event.findbyId(eventId)
+
+  .then(event => {
+    // determine if loggedIn user is authorized to delete this(aka, the owner)
+    if (event.owner == userId) {
+        // here is where we delete
+        return event.deleteOne()
+    } else {
+        // if the loggedIn user is NOT the owner
+        res.redirect(`/error?error=You%20Are%20Not%20Allowed%20to%20Delete%20this%20Place`)
+    }
+})
+// redirect to another page
+.then(deletedPlace => {
+    // console.log('this was returned from deleteOne', deletedPlace)
+
+    res.redirect('/events/mine')
+})
+// if err -> send to err page
+.catch(err => {
+    console.log('error')
+    res.redirect(`/error?error=${err}`)
+})
+})
+
+// GET -> /places/:name
+// API data show page -> least specific - goes under all more specific routes
+// give us a specific country's details after searching with the name
+
+
 //GET -> /events/venue
 //getting axios 403 error, API will not allow the use of a 2nd end point
 // router.get('/:venue', (req, res) => {

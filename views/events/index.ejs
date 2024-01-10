@@ -16,12 +16,18 @@
           <form action="/events/add" method="POST">
           <fieldset>
           <input hidden type="text" name="type" value="<%= e.type %>">
+          <input hidden type="text" name="type" value="<%= e.datetime_utc %>">
+          <input hidden type="text" name="type" value="<%= e.venue.name_v2 %>">
+          <input hidden type="text" name="type" value="<%= e.venue.address %>">
+        
+          
           <label for="interested">Interested</label>
           <input type="checkbox" name="Interested?" checked>
+          <button type="submit">Save</button>
           </fieldset>
-          <button type="submit">Submit</button>
+        
           </form>
-          <button class="heart-btn" data-event-id="<%= e.id %>">&#10084;</button>
+        
         </div>
       </div>
     </div>
@@ -30,27 +36,3 @@
 
 
 <%- include('../partials/footer') %>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-<script>
-    
-    document.addEventListener('DOMContentLoaded', function() {
-      const heartButtons = document.querySelectorAll('.heart-btn');
-  
-      heartButtons.forEach(function(heartButton) {
-        heartButton.addEventListener('click', function() {
-          const eventId = this.dataset.eventId;
-  
-          axios.post(`/events/toggle-like-event/${eventId}`)
-          .then(response => {
-            console.log('Event liked:', response.data);
-            // Optionally update UI to indicate the event is liked
-          })
-          .catch(error => {
-            console.error('Error liking event:', error);
-          });
-      });
-    });
-  });
-          
-  </script>

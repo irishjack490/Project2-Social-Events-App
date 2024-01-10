@@ -18,3 +18,36 @@ body {
     max-width: 20%
     
 }
+
+table {
+    width: 100%;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    vertical-align: top; /* Adjust the vertical alignment as needed */
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.remove-button {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.remove-label {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.remEv {
+
+    align-items: self-end;
+}
