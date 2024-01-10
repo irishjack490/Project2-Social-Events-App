@@ -51,7 +51,7 @@ router.post('/add', async (req, res) => {
   Event.create(theEvent)
     .then(newEvent => {
       //res.send(newEvent)
-      res.redirect(`/events/mine`)
+      res.redirect(`events/mine`)
     })
     .catch(err => {
       console.log('error')
@@ -78,33 +78,35 @@ const { username, loggedIn, userId } = req.session
 
 })
 //Remove event from interested list
-router.get('/delete/:id', (req, res) => {
+router.delete('/delete/:id', (req, res) => {
   const { username, loggedIn, userId } = req.session
-  const eventId = req.params.id
+  // target the specific place
+  const event = req.params.id
+  // find it in the database
+  Event.findById(eventId)
+      // delete it 
+      .then(event => {
+          // determine if loggedIn user is authorized to delete this(aka, the owner)
+          if (event.owner == userId) {
+              // here is where we delete
+              return event.deleteOne()
+          } else {
+              // if the loggedIn user is NOT the owner
+              res.redirect(`/error?error=You%20Are%20Not%20Allowed%20to%20Delete%20this%20Place`)
+          }
+      })
+      // redirect to another page
+      .then(deletedEvent => {
+          // console.log('this was returned from deleteOne', deletedPlace)
 
-  Event.findbyId(eventId)
+          res.redirect('/events/mine')
+      })
+      // if err -> send to err page
+      .catch(err => {
+          console.log('error')
+          res.redirect(`/error?error=${err}`)
+      })
 
-  .then(event => {
-    // determine if loggedIn user is authorized to delete this(aka, the owner)
-    if (event.owner == userId) {
-        // here is where we delete
-        return event.deleteOne()
-    } else {
-        // if the loggedIn user is NOT the owner
-        res.redirect(`/error?error=You%20Are%20Not%20Allowed%20to%20Delete%20this%20Place`)
-    }
-})
-// redirect to another page
-.then(deletedPlace => {
-    // console.log('this was returned from deleteOne', deletedPlace)
-
-    res.redirect('/events/mine')
-})
-// if err -> send to err page
-.catch(err => {
-    console.log('error')
-    res.redirect(`/error?error=${err}`)
-})
 })
 
 // GET -> /places/:name
