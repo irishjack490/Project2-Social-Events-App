@@ -6,7 +6,7 @@ const User = require('../models/user');
 ///Create Router/////
 const router = express.Router();
 const allEventsUrl = process.env.EVENT_API_URL;
-//const eventIdUrl = process.env.EVENT_ID_API_URL;
+
 
 
 
@@ -40,28 +40,22 @@ router.get('/all', (req, res) => {
         })
 })
 
-router.get('/events/:id', (req, res) => {
-  const eventId = decodeURIComponent(req.params.id);
-
-  // Fetch data or render the page based on the eventId
-  res.render('events/show', { eventId });
-});
-
 
 //POST  -> events/add
-router.post('/add', async (req, res) => {
-  const { username, loggedIn, userId } = req.session
-  //gets info from index all events
-  const theEvent = req.body 
-  theEvent.owner = userId
-  theEvent.interested = !!theEvent.interested
- // console.log('This must be the event: \n', theEvent)
-
-  //res.send(theEvent)
-  Event.create(theEvent)
+router.post('/add', (req, res) => {
+    const { username, loggedIn, userId } = req.session
+    //gets info from index all events
+    const theEvent = req.body 
+    //console.log('This must be the event:', theEvent)
+    theEvent.owner = userId
+    //res.send(theEvent)
+    theEvent.interested = !!theEvent.interested
+    theEvent.attending = !!theEvent.attending
+    
+    Event.create(theEvent)
     .then(newEvent => {
       //res.send(newEvent)
-      res.redirect(`events/mine`)
+     res.redirect(`/events/${newEvent._id}`)
     })
     .catch(err => {
       console.log('error')

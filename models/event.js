@@ -22,6 +22,6 @@ const eventSchema = new Schema ({
   timestamps: true,
 });
 
-const Events = model ('Event', eventSchema )
+const Event = model ('Event', eventSchema )
 
-module.exports = Event
+module.exports = Event;

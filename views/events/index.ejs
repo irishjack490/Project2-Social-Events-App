@@ -9,26 +9,27 @@
             <div class="card-body">
               <h5 class="card-title"><%= event.name %></h5>
               <h6 class="card-title"><%= event.dates.start.localDate %></h6>
-              <h6 class ="card-text"><%= event.dates.start.localTime %></h6>
+              <h6 class ="card-text"><%= event.dates.start.localTme %></h6>
               <h6 class ="card-text"><%= event._embedded.venues[0].name %></h6>
               <h6 class ="card-text"><%= event._embedded.venues[0].address.line1 %></h6>
               <p class="card-text"></p>
           <!--Takes use to another page for more details-->
-          <a href="/events/<%= event.name %>" class="btn btn-primary">Interested</a>
-           <form>
+          <!-- <a href="/events/<%= event.name %>" class="btn btn-primary">Interested</a> -->
+           <form action="/events/add/" method="POST">
+            <h5>Add this to your events</h5>
               <fieldset>
     
                 <input hidden type="text" name="name" value="<%= event.name %>">
-                <input hidden type="text" name="region" value="<%= event.dates.start.localDate %>">
-                <input hidden type="text" name="subRegion" value="<%= event.dates.start.localTime %>">
-                <input hidden type="text" name="mapLink" value="<%= event._embedded.venues[0].name %>">
-                <input hidden type="number" name="lat" value="<%= event._embedded.venues[0].address.line1   %>">
-                <label for="Interested">Interested</label>
-                <input type="checkbox" name="Interested" checked>
-                <label for="Attending">Attending</label>
-                <input type="checkbox" name="Attending" checked>
+                <input hidden type="text" name="localDate" value="<%= event.dates.start.localDate %>">
+                <input hidden type="text" name="localTime" value="<%= event.dates.start.localTime %>">
+                <input hidden type="text" name="venueName" value="<%= event._embedded.venues[0].name %>">
+                <input hidden type="text" name="venueAddress" value="<%= event._embedded.venues[0].address.line1   %>">
+                <label for="interested">Interested</label>
+                <input type="checkbox" name="interested" checked>
+                <label for="attending">Attending</label>
+                <input type="checkbox" name="attending" checked>
               </fieldset>
-              <input type="submit" class="btn btn-success" value="Add to interested list ">
+              <input type="submit" class="btn btn-success" value="Add to list ">
 
            </form>
         </div>
