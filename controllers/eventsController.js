@@ -55,7 +55,8 @@ router.post('/add', (req, res) => {
     Event.create(theEvent)
     .then(newEvent => {
       //res.send(newEvent)
-     res.redirect(`/events/${newEvent._id}`)
+      console.log('Event created:', newEvent);
+     res.redirect('/events/mine')
     })
     .catch(err => {
       console.log('error')
@@ -63,16 +64,17 @@ router.post('/add', (req, res) => {
   })
 
 })
-//displays saved places 
+//GET -> mine displays saved places 
 router.get('/mine', (req, res) => {
 //query database 
 //display in list format 
 const { username, loggedIn, userId } = req.session
+//query db 
   Event.find({owner: userId})
   .then(userEvents => {
 
-    //res.send(userEvents)
-    res.render('events/mine', {events: userEvents, username, loggedIn, userId})
+    res.send(userEvents)
+    //res.render('events/mine', {events: userEvents, username, loggedIn, userId})
   })
 
   .catch(err => {
@@ -83,36 +85,36 @@ const { username, loggedIn, userId } = req.session
 })
 //Remove event from interested list
 //events/delete/:id
-router.delete('/delete/:id', (req, res) => {
-  const { username, loggedIn, userId } = req.session
-  // target the specific event
-  const eventId = req.params._id
-  // find it in the database
-  Event.findById(eventId)
-      // delete it 
-      .then(event => {
-          // determine if loggedIn user is authorized to delete this(aka, the owner)
-          if (event.owner == userId) {
-              // here is where we delete
-              return event.deleteOne()
-          } else {
-              // if the loggedIn user is NOT the owner
-              res.redirect(`/error?error=You%20Are%20Not%20Allowed%20to%20Delete%20this%20Place`)
-          }
-      })
-      // redirect to another page
-      .then(deletedEvent => {
-           console.log('this was returned from deleteOne', deletedEvent)
+// router.delete('/delete/:id', (req, res) => {
+//   const { username, loggedIn, userId } = req.session
+//   // target the specific event
+//   const eventId = req.params._id
+//   // find it in the database
+//   Event.findById(eventId)
+//       // delete it 
+//       .then(event => {
+//           // determine if loggedIn user is authorized to delete this(aka, the owner)
+//           if (event.owner == userId) {
+//               // here is where we delete
+//               return event.deleteOne()
+//           } else {
+//               // if the loggedIn user is NOT the owner
+//               res.redirect(`/error?error=You%20Are%20Not%20Allowed%20to%20Delete%20this%20Place`)
+//           }
+//       })
+//       // redirect to another page
+//       .then(deletedEvent => {
+//            console.log('this was returned from deleteOne', deletedEvent)
 
-          res.redirect('/events/mine')
-      })
-      // if err -> send to err page
-      .catch(err => {
-          console.log('error')
-          res.redirect(`/error?error=${err}`)
-      })
+//           res.redirect('/events/mine')
+//       })
+//       // if err -> send to err page
+//       .catch(err => {
+//           console.log('error')
+//           res.redirect(`/error?error=${err}`)
+//       })
 
-})
+// })
 
   
  
