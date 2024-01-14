@@ -4,12 +4,14 @@ const {Schema, model} = mongoose;
 
 
 const eventSchema = new Schema ({
-  type: { type: Array, required: true },
-  datetime_utc: { type: Array,  required: true},
-  venueName: {type: Array, required: true},
-  venueAddress: {type: Array, required: true},
-  interested: {type: Boolean, required: true },
-  
+
+  name: { type: String, required: true },
+  localDate: { type: String,  required: true},
+  localTime: {type: String, required: true},
+  venueName: {type: String, required: true},
+  venueAddress: { type: String, required: true},
+  interested: { type: Boolean, required: true},
+  attending: { type: Boolean, required: true},
   //id reference, mongoose syntax, object id reference: mongoose validator
   owner: {
     type: Schema.Types.ObjectId,
@@ -22,4 +24,4 @@ const eventSchema = new Schema ({
 
 const Events = model ('Event', eventSchema )
 
-module.exports = mongoose.model('Event', eventSchema);
+module.exports = Event

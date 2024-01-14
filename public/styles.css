@@ -2,6 +2,11 @@ body {
     background-color: #4B9CD3;
 }
 
+.center-cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .custom-card {
     max-width: 380px; /* Adjust the max-width to your desired width */
@@ -15,7 +20,7 @@ body {
 }
 
 .card-img-top1 {
-    max-width: 20%
+    max-width: 30%
     
 }
 

@@ -1,37 +1,42 @@
 <%- include('../partials/header') %>
+<div class="center-cards">
+  <div class="row row-cols-1 row-cols-md-2 g-4">
+    <% if(events && events._embedded && Array.isArray(events._embedded.events) && events._embedded.events.length > 0) { %>
+      <% events._embedded.events.forEach(function(event) { %>
+        <div class="col">
+          <div class="card custom-card">
+            <img src="<%= event.images[0].url %>" class="card-img-top" alt="event-image">
+            <div class="card-body">
+              <h5 class="card-title"><%= event.name %></h5>
+              <h6 class="card-title"><%= event.dates.start.localDate %></h6>
+              <h6 class ="card-text"><%= event.dates.start.localTime %></h6>
+              <h6 class ="card-text"><%= event._embedded.venues[0].name %></h6>
+              <h6 class ="card-text"><%= event._embedded.venues[0].address.line1 %></h6>
+              <p class="card-text"></p>
+          <!--Takes use to another page for more details-->
+          <a href="/events/<%= event.name %>" class="btn btn-primary">Interested</a>
+           <form>
+              <fieldset>
+    
+                <input hidden type="text" name="name" value="<%= event.name %>">
+                <input hidden type="text" name="region" value="<%= event.dates.start.localDate %>">
+                <input hidden type="text" name="subRegion" value="<%= event.dates.start.localTime %>">
+                <input hidden type="text" name="mapLink" value="<%= event._embedded.venues[0].name %>">
+                <input hidden type="number" name="lat" value="<%= event._embedded.venues[0].address.line1   %>">
+                <label for="Interested">Interested</label>
+                <input type="checkbox" name="Interested" checked>
+                <label for="Attending">Attending</label>
+                <input type="checkbox" name="Attending" checked>
+              </fieldset>
+              <input type="submit" class="btn btn-success" value="Add to interested list ">
 
-<div class="row row-cols-1 row-cols-md-2 g-4">
-  <% events.forEach(function(e) { %>
-    <div class="col">
-      <div class="card custom-card">
-        <img src="<%= e.performers[0].image %>" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title"><%= e.type %></h5>
-          <p class="card-text">Location: <%= e.venue.name_v2 %> </p>
-          <p class="card-text"> <%= e.venue.address %> </p>
-          <p class="card-text"> <%= e.venue.state %> </p>
-          <a href="<%= e.venue.url %>" class="btn btn-primary">Click here for more info!</a>
-
-         <!--This will go to /events/add-->
-          <form action="/events/add" method="POST">
-          <fieldset>
-          <input hidden type="text" name="type" value="<%= e.type %>">
-          <input hidden type="text" name="type" value="<%= e.datetime_utc %>">
-          <input hidden type="text" name="type" value="<%= e.venue.name_v2 %>">
-          <input hidden type="text" name="type" value="<%= e.venue.address %>">
-        
-          
-          <label for="interested">Interested</label>
-          <input type="checkbox" name="Interested?" checked>
-          <button type="submit">Save</button>
-          </fieldset>
-        
-          </form>
-        
+           </form>
         </div>
       </div>
     </div>
   <% }) %>
+  <% } %>
+  </div>
 </div>
 
 

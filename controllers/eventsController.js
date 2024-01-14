@@ -6,6 +6,8 @@ const User = require('../models/user');
 ///Create Router/////
 const router = express.Router();
 const allEventsUrl = process.env.EVENT_API_URL;
+//const eventIdUrl = process.env.EVENT_ID_API_URL;
+
 
 
 /////Routes+Controllers/////
@@ -24,11 +26,11 @@ router.get('/all', (req, res) => {
     axios(allEventsUrl)
         // if we get data, render an index page
         .then(apiRes => {
-            console.log('this came back from the api: \n', apiRes.data.events)
+            //console.log('this came back from the api: \n', apiRes.data[0])
             // apiRes.data is an array of events objects 
-        //res.send(apiRes.data)
+      //res.send(apiRes.data)
         
-        res.render('events/index', { events: apiRes.data.events, username, userId, loggedIn})
+       res.render('events/index', { events: apiRes.data, username, userId, loggedIn})
         
         })
         // if something goes wrong, display an error page
@@ -37,6 +39,14 @@ router.get('/all', (req, res) => {
             res.redirect(`/error?error=${err}`)
         })
 })
+
+router.get('/events/:id', (req, res) => {
+  const eventId = decodeURIComponent(req.params.id);
+
+  // Fetch data or render the page based on the eventId
+  res.render('events/show', { eventId });
+});
+
 
 //POST  -> events/add
 router.post('/add', async (req, res) => {
@@ -78,10 +88,11 @@ const { username, loggedIn, userId } = req.session
 
 })
 //Remove event from interested list
+//events/delete/:id
 router.delete('/delete/:id', (req, res) => {
   const { username, loggedIn, userId } = req.session
-  // target the specific place
-  const event = req.params.id
+  // target the specific event
+  const eventId = req.params._id
   // find it in the database
   Event.findById(eventId)
       // delete it 
@@ -97,7 +108,7 @@ router.delete('/delete/:id', (req, res) => {
       })
       // redirect to another page
       .then(deletedEvent => {
-          // console.log('this was returned from deleteOne', deletedPlace)
+           console.log('this was returned from deleteOne', deletedEvent)
 
           res.redirect('/events/mine')
       })
@@ -108,99 +119,6 @@ router.delete('/delete/:id', (req, res) => {
       })
 
 })
-
-// GET -> /places/:name
-// API data show page -> least specific - goes under all more specific routes
-// give us a specific country's details after searching with the name
-
-
-//GET -> /events/venue
-//getting axios 403 error, API will not allow the use of a 2nd end point
-// router.get('/:venue', (req, res) => {
-//   const { username, loggedIn, userId } = req.session
-//   const venueName = req.params.venue
-  
-  // make our api call
-//   axios(`${allVenuesUrl}${venueName}`)
-//       // render the results on a 'show' page: aka 'detail' page
-//       .then(apiRes => {
-//           const foundVenue = apiRes.data[0]
-//           // res.send(foundEvent)
-//           res.render('events/show', { venue: foundVenue, username, loggedIn, userId })
-//       })
-//       // if we get an error, display the error
-//       .catch(err => {
-//           console.log('error')
-//           res.redirect(`/error?error=${err}`)
-//       })
-// })
-
-//Code for heart: liked events
-// router.post('/like-event/:eventId', async (req, res) => {
-//     const eventId = req.params.eventId;
-//     const userId = req.session.userId; // Assuming user is already authenticated
-  
-//     try {
-//       const user = await User.findById(userId);
-  
-//       // Check if the event is not already liked to avoid duplicates
-//       if (!user.likedEvents.includes(eventId)) {
-//         user.likedEvents.push(eventId);
-//         await user.save();
-//         res.json({ success: true, message: 'Event liked successfully' });
-//       } else {
-//         res.json({ success: false, message: 'Event already liked' });
-//       }
-//     } catch (error) {
-//       console.error('Error liking event:', error);
-//       res.status(500).json({ success: false, message: 'Internal Server Error' });
-//     }
-//   });
-
-  // router.get('/favorites', async (req, res) => {
-  //   const { username, loggedIn, userId } = req.session
-  //   try {
-  //     const userId = req.session.userId;
-  //     const user = await User.findById(userId).populate('likedEvents'); // Populate the likedEvents array with actual event documents
-      
-  //     const likedEvents = user.likedEvents;
-  
-  //     res.render('events/favorites', { likedEvents, username, userId, loggedIn });
-  //   } catch (error) {
-  //     console.error('Error fetching liked events:', error);
-  //     res.status(500).json({ success: false, message: 'Internal Server Error' });
-  //   }
-  // });
-
-  //Delete event from favorites when clicking on the button
-
-  // router.post('/toggle-like-event/:eventId', async (req, res) => {
-  //   const { username, loggedIn, userId } = req.session
-  //   const eventId = req.params.eventId;
-    
-  
-  //   try {
-  //     const user = await User.findById(userId);
-  
-  //     // Check if the event is liked
-  //     const eventIndex = user.likedEvents.indexOf(eventId);
-  //     if (eventIndex !== -1) {
-  //       // If liked, remove it
-  //       user.likedEvents.splice(eventIndex, 1);
-  //       await user.save();
-  //       res.json({ success: true, message: 'Event removed from favorites' });
-  //     } else {
-  //       // If not liked, add it
-  //       user.likedEvents.push(eventId);
-  //       await user.save();
-  //       res.json({ success: true, message: 'Event added to favorites' });
-  //     }
-  //   } catch (error) {
-  //     console.error('Error toggling event like:', error);
-  //     res.status(500).json({ success: false, message: 'Internal Server Error' });
-  //   }
-  // });
-
 
   
  
