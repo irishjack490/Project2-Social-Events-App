@@ -73,8 +73,8 @@ const { username, loggedIn, userId } = req.session
   Event.find({owner: userId})
   .then(userEvents => {
 
-    res.send(userEvents)
-    //res.render('events/mine', {events: userEvents, username, loggedIn, userId})
+    //res.send(userEvents)
+    res.render('events/mine', {events: userEvents, username, loggedIn, userId})
   })
 
   .catch(err => {
@@ -82,6 +82,20 @@ const { username, loggedIn, userId } = req.session
     res.redirect(`/error?error=${err}`)
 })
 
+})
+
+router.get('/mine/:id', (req, res) => {
+
+  //find specific event using the id
+  Event.findById(req.params.id)
+  //display user-specific page
+    .then(theEvent => {
+      res.send(theEvent)
+    })
+    .catch(err => {
+      console.log('error')
+      res.redirect(`/error?error=${err}`)
+    })
 })
 //Remove event from interested list
 //events/delete/:id
