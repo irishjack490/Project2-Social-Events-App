@@ -11,6 +11,7 @@ const eventSchema = new Schema ({
   venueName: {type: String, required: true},
   venueAddress: { type: String, required: true},
   eventImage: [{ type: String, required: true}], 
+  eventUrl: { type: String, required: true },
   interested: { type: Boolean, required: true},
   attending: { type: Boolean, required: true},
   
