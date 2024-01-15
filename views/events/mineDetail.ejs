@@ -7,6 +7,8 @@
             <th scope="col">Venue</th>
             <th scope="col">Address</th>
             <th scope="col">Get Tickets</th>
+            <th scope="col">Intersted</th>
+            <th scope="col">Attending</th>
         </tr>
     </thead>
     <tbody>
@@ -17,9 +19,34 @@
                     <td scope="row"><%= events.venueName %></td>
                     <td scope="row"><%= events.venueAddress %></td>
                     <td scope="row"><a href="<%= events.eventUrl %>" target="_blank">Tickets Link</a></td>
+                    <td scope="row"><%= events.interested ? 'Y' : 'N' %></td>
+                    <td scope="row"><%= events.attending ? 'Y' : 'N' %> </td>
         </tr>
     </tbody>
 </table>
+<form action="/events/update/<%= events._id %>?_method=PUT" method="POST">
+    
+      <fieldset>
+
+        <input hidden type="text" name="name" value="<%= events.name %>">
+        <input hidden type="text" name="localDate" value="<%= events.localDate %>">
+        <input hidden type="text" name="localTime" value="<%= events.localTime %>">
+        <input hidden type="text" name="venueName" value="<%= events.venueName %>">
+        <input hidden type="text" name="venueAddress" value="<%= events.venueAddress %>">
+        <input hidden type="text" name="eventImage" value="<%= events.images %>">
+        <input hidden type="text" name="eventImage" value="<%= events.images %>">
+        <input hidden type="text" name="eventUrl" value="<%= events.eventUrl %>">
+        
+        <label for="interested">Interested</label>
+        <input type="checkbox" name="interested"  <%= events.interested ? 'checked' : '' %>>
+        <label for="attending">Attending</label>
+        <input type="checkbox" name="attending"  <%= events.attending ? 'checked' : '' %>>
+        <input type="submit" class="btn btn-success" value="Update Place">
+      </fieldset>
+      
+
+   </form>
+
 </form>
         <form class="me-3" action="/events/delete/<%= events._id %>?_method=DELETE" method="POST">
             <input type="submit" class="btn btn-danger" value="Delete this Event">

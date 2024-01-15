@@ -98,6 +98,45 @@ router.get('/mine/:id', (req, res) => {
       res.redirect(`/error?error=${err}`)
     })
 })
+//UPDATE events/update/:id
+router.put('/update/:id', (req, res) =>{
+  const { username, loggedIn, userId } = req.session
+//target specific event
+  const eventId = req.params.id
+
+  const theEvent = req.body
+
+//remove ownership from req.body
+  delete theEvent.owner
+  theEvent.owner = userId
+
+  theEvent.interested = !!theEvent.interested
+  theEvent.attending = !!theEvent.attending
+
+  console.log('This is request.body', theEvent)
+//check ownership
+  Event.findById(eventId)
+    .then(foundEvent => {
+      // console.log('the event we found', foundEvent)
+      // res.send(req.body)
+       // determine if loggedIn user is authorized to delete this(aka, the owner)
+       if (foundEvent.owner == userId) {
+          return foundEvent()
+    } else {
+        // if the loggedIn user is NOT the owner
+        res.redirect(`/error?error=You%20Are%20Not%20Allowed%20to%20Update%20this%20Event`)
+    }
+    })
+//allow update and refresh page
+    .catch(err => {
+      console.log('error')
+      res.redirect(`/error?error=${err}`)
+  })
+
+//if not send error
+
+
+})
 
 //DELETE -> /events/delete/:id
 //Remove events from user's list 
