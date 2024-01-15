@@ -24,6 +24,9 @@
                 <input hidden type="text" name="localTime" value="<%= event.dates.start.localTime %>">
                 <input hidden type="text" name="venueName" value="<%= event._embedded.venues[0].name %>">
                 <input hidden type="text" name="venueAddress" value="<%= event._embedded.venues[0].address.line1   %>">
+                <input hidden type="text" name="eventImage" value="<%= event.images[0].url %>">
+                <input hidden type="text" name="eventImage" value="<%= event.images[0].url %>">
+                
                 <label for="interested">Interested</label>
                 <input type="checkbox" name="interested" checked>
                 <label for="attending">Attending</label>

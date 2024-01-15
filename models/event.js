@@ -10,8 +10,10 @@ const eventSchema = new Schema ({
   localTime: {type: String, required: true},
   venueName: {type: String, required: true},
   venueAddress: { type: String, required: true},
+  eventImage: [{ type: String, required: true}], 
   interested: { type: Boolean, required: true},
   attending: { type: Boolean, required: true},
+  
   //id reference, mongoose syntax, object id reference: mongoose validator
   owner: {
     type: Schema.Types.ObjectId,

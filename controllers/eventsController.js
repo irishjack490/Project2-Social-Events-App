@@ -55,7 +55,7 @@ router.post('/add', (req, res) => {
     Event.create(theEvent)
     .then(newEvent => {
       //res.send(newEvent)
-      console.log('Event created:', newEvent);
+      //console.log('Event created:', newEvent);
      res.redirect('/events/mine')
     })
     .catch(err => {
