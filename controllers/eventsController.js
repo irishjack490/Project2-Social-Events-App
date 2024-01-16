@@ -64,7 +64,7 @@ router.post('/add', (req, res) => {
   })
 
 })
-//GET -> mine displays saved places 
+//GET -> mine displays saved events
 router.get('/mine', (req, res) => {
 //query database 
 //display in list format 
