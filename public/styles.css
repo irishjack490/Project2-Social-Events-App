@@ -9,8 +9,8 @@ body {
 }
 
 .custom-card {
-    max-width: 380px; /* Adjust the max-width to your desired width */
-    margin: auto; /* Center the card */
+    max-width: 380px; 
+    margin: auto; 
   }
 
 .card-img-top {
@@ -52,22 +52,19 @@ tbody tr:nth-child(even) {
     margin-right: 10px;
 }
 
-.remEv {
 
-    align-items: self-end;
-}
 .container {
     display: flex;
     flex-wrap: wrap;
   }
   
   .container img {
-    width: 33.33%; /* Set width to 1/3 of the container for a three-column layout */
+    width: 33.33%; 
     box-sizing: border-box;
-    padding: 5px; /* Add some padding for spacing between images */
+    padding: 5px; 
   }
   
   h1 {
-    width: 100%; /* Ensure the heading takes the full width of the container */
-    text-align: center; /* Center-align the heading */
+    width: 100%; 
+    text-align: center; 
   }
