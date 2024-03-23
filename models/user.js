@@ -15,8 +15,7 @@ const userSchema = new Schema ({
         type: String,
         required: true, 
     }
-    //heart feature 
-    //likedEvents: [{ type: Number, unique: true }],
+    
 })
 ///User Model////
 const User = model('User', userSchema);
